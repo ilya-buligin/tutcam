@@ -1,12 +1,20 @@
 <template>
+  <AppBar
+    v-if="isInSelectionMode"
+    class="gallery__appbar"
+    :title="`${selectedCount} selected`"
+    icon="close"
+    @icon-click="clearSelection"
+  />
   <Layout title="Your places">
-    <span class="secondary-text">{{ selectedCount }} places</span>
+    <span class="secondary-text">0 places</span>
     <ul class="gallery__cards">
       <Card
         v-for="i in 10"
         :key="i"
         :selected="selected[i]"
-        @select="onSelect(i)"
+        @select="select(i)"
+        @link-click="onCardLinkClick($event, i)"
       />
     </ul>
   </Layout>
@@ -16,27 +24,47 @@
 import { defineComponent, reactive, computed } from 'vue';
 
 import Layout from '@/layouts/main.vue';
+import AppBar from '@/components/appbar.vue';
 import Card from './card.vue';
 
 export default defineComponent({
   name: 'GalleryView',
-  components: { Layout, Card },
+  components: { Layout, Card, AppBar },
   setup() {
     const selected = reactive<{ [id: string]: boolean }>({});
     const selectedCount = computed(
       () => Object.entries(selected).filter(([, v]) => v).length
     );
+    const isInSelectionMode = computed(() => selectedCount.value > 0);
 
-    const onSelect = (id: string) => {
+    const select = (id: string) => {
       if (selected[id]) {
         selected[id] = false;
       } else {
         selected[id] = true;
       }
-      console.log(selected);
     };
 
-    return { selected, onSelect, selectedCount };
+    const clearSelection = () => {
+      Object.entries(selected).forEach(([k]) => (selected[k] = false));
+    };
+
+    const onCardLinkClick = (e: Event, id: string) => {
+      if (isInSelectionMode.value) {
+        select(id);
+      } else {
+        // router.push
+      }
+    };
+
+    return {
+      selected,
+      select,
+      selectedCount,
+      clearSelection,
+      onCardLinkClick,
+      isInSelectionMode
+    };
   }
 });
 </script>
@@ -48,5 +76,12 @@ export default defineComponent({
   grid-gap: 12px;
   margin: 24px 0;
   padding: 0;
+}
+
+.gallery__appbar {
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+  box-shadow: none;
 }
 </style>

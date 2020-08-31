@@ -7,7 +7,11 @@
         @click="$emit('select')"
       />
     </div>
-    <a href="#" class="gallery-card__container">
+    <a
+      href="#"
+      class="gallery-card__container"
+      @click.prevent="$emit('link-click')"
+    >
       <img class="gallery-card__preview" v-bind="{ src }" :alt="name" />
       <div class="gallery-card__overlay"></div>
       <p class="gallery-card__title">

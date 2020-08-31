@@ -1,12 +1,9 @@
-ga<template>
-  <header class="header" :class="{ 'header--with-sidebar': isSidebarVisible }">
-    <IconBtn
-      icon="menu"
-      tabindex="1"
-      @click="isSidebarVisible = !isSidebarVisible"
-    />
-    <h1 v-if="title" class="header__title">{{ title }}</h1>
-  </header>
+<template>
+  <AppBar
+    v-bind="{ title }"
+    :class="{ 'appbar--with-sidebar': isSidebarVisible }"
+    @icon-click="isSidebarVisible = !isSidebarVisible"
+  />
   <main class="main" :class="{ 'main--with-sidebar': isSidebarVisible }">
     <slot />
   </main>
@@ -30,11 +27,13 @@ ga<template>
 import { defineComponent, ref } from 'vue';
 
 import IconBtn from '@/components/icon-btn.vue';
+import AppBar from '@/components/appbar.vue';
 
 export default defineComponent({
   name: 'MainLayout',
   components: {
-    IconBtn
+    IconBtn,
+    AppBar
   },
   props: {
     title: {
@@ -73,33 +72,15 @@ export default defineComponent({
   margin: 8px 16px;
 }
 
-.header {
-  position: sticky;
-  display: flex;
-  align-items: center;
-  top: 0;
-  height: 64px;
-  padding: 4px 16px;
-  background: var(--header-bg);
-  color: var(--header-color);
-  box-shadow: 0px 4px 7px 0px rgba(0, 0, 0, 0.3);
-  z-index: 2;
-
-  .header__title {
-    font-size: 20px;
-    margin-left: 20px;
-  }
-}
-
 .main {
   padding: 24px;
 }
 
-.header,
+.appbar,
 .main {
   transition: margin-left 0.3s;
 }
-.header--with-sidebar,
+.appbar--with-sidebar,
 .main--with-sidebar {
   margin-left: var(--sidebar-width);
 }
@@ -115,7 +96,7 @@ export default defineComponent({
 }
 
 @media (max-width: 768px) {
-  .header--with-sidebar,
+  .appbar--with-sidebar,
   .main--with-sidebar {
     margin-left: 0;
   }
@@ -127,19 +108,13 @@ export default defineComponent({
   }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 426px) {
   .sidebar {
-    --sidebar-width: 320px;
+    --sidebar-width: 426px;
   }
-}
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+  .main {
+    padding: 18px;
+  }
 }
 </style>
