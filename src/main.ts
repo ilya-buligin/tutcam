@@ -1,10 +1,18 @@
-import { createApp } from "vue";
-import App from "./App.vue";
-import "./registerServiceWorker";
-import router from "./router";
-import store from "./store";
+import 'normalize.css';
+import './registerServiceWorker';
 
-createApp(App)
+import { createApp } from 'vue';
+import App from './app.vue';
+
+import router from './router';
+import store from './store';
+
+import ripple from '@/directives/ripple';
+
+export const app = createApp(App);
+
+app
   .use(store)
   .use(router)
-  .mount("#app");
+  .directive('ripple', ripple)
+  .mount('#app');
