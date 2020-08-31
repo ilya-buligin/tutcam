@@ -18,6 +18,7 @@
       />
     </ul>
   </Layout>
+  <CameraBtn />
 </template>
 
 <script lang="ts">
@@ -25,11 +26,13 @@ import { defineComponent, reactive, computed, nextTick } from 'vue';
 
 import Layout from '@/layouts/main.vue';
 import AppBar from '@/components/appbar.vue';
+
 import Card from './card.vue';
+import CameraBtn from './camera-btn.vue';
 
 export default defineComponent({
   name: 'GalleryView',
-  components: { Layout, Card, AppBar },
+  components: { Layout, Card, AppBar, CameraBtn },
   setup() {
     const selected = reactive<{ [id: string]: boolean }>({});
     const selectedCount = computed(

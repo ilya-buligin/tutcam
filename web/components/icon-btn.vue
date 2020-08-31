@@ -7,6 +7,7 @@
 <script>
 import Icon from '@/components/icon.vue';
 export default {
+  name: 'IconBtn',
   components: {
     Icon
   },
