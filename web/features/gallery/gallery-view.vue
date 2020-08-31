@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, computed } from 'vue';
+import { defineComponent, reactive, computed, nextTick } from 'vue';
 
 import Layout from '@/layouts/main.vue';
 import AppBar from '@/components/appbar.vue';
@@ -49,9 +49,10 @@ export default defineComponent({
       Object.entries(selected).forEach(([k]) => (selected[k] = false));
     };
 
-    const onCardLinkClick = (e: Event, id: string) => {
+    const onCardLinkClick = async (e: Event, id: string) => {
       if (isInSelectionMode.value) {
         select(id);
+        (document.activeElement as HTMLElement).blur();
       } else {
         // router.push
       }
