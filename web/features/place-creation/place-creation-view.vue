@@ -3,7 +3,7 @@
     <form action="" class="place-creation">
       <CapturedPhoto />
       <TextBox label="Name" class="mb-1" :placeholder="defaultName" />
-      <CapturedGeo />
+      <!-- <CapturedGeo /> -->
     </form>
   </Layout>
 </template>
