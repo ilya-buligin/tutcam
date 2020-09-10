@@ -71,6 +71,9 @@ $border-radius: 4px;
     border-radius: $border-radius;
     overflow: hidden;
     outline: none;
+    border: 0px solid;
+    transition: border 0.2s ease-in-out;
+
     &:focus {
       box-shadow: 0 0 0 3px var(--primary-color);
     }
@@ -148,7 +151,7 @@ $border-radius: 4px;
     img {
       border-radius: 0;
     }
-    border: 7px solid rgba(#0288d1, 0.2);
+    border: 14px solid rgba(#0288d1, 0.2);
   }
 }
 </style>

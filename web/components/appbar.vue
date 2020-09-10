@@ -37,7 +37,7 @@ export default defineComponent({
   height: 64px;
   padding: 4px 16px;
   background: var(--header-bg);
-  color: var(--header-color);
+  color: var(--header-text-color);
   box-shadow: 0px 4px 7px 0px rgba(0, 0, 0, 0.3);
   z-index: 2;
 

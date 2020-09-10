@@ -31,6 +31,8 @@ export default {
   justify-content: center;
   width: var(--btn-size);
   height: var(--btn-size);
+  padding: 0;
+  line-height: 1;
   color: inherit;
   border: none;
   background-color: var(--btn-color);

@@ -4,6 +4,7 @@ html,
 body {
   min-height: 100vh;
   background-color: var(--page-bg);
+  color: var(--primary-text-color);
 }
 
 html,
@@ -26,6 +27,12 @@ button {
   color: var(--secondary-text-color);
 }
 
+.mb-1 {
+  margin-bottom: 16px;
+}
+.mr-1-4 {
+  margin-right: 4px;
+}
 
 // =================== TRANSITIONS ===================
 .fade-enter-active,

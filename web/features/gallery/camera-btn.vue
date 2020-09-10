@@ -1,13 +1,13 @@
 <template>
   <div class="camera-btn">
     <FloatingBtn icon="camera" @click="clickHandler" />
-    <input ref="cameraInput" type="file" accept="image/*;capture=camera" />
   </div>
 </template>
 
 <script lang="ts">
-import { ref } from 'vue';
-
+import router from '@/router';
+import { setCapturedPhoto } from '@/state';
+import { getPhoto } from '@/services/camera';
 import FloatingBtn from '@/components/floating-btn.vue';
 
 export default {
@@ -16,28 +16,29 @@ export default {
     FloatingBtn
   },
   setup() {
-    const cameraInput = ref();
-    const clickHandler = () => {
-      console.log(cameraInput.value);
-      (cameraInput.value as HTMLInputElement).click();
+    const clickHandler = async () => {
+      const photo = await getPhoto();
+      setCapturedPhoto(photo);
+      router.push({ name: 'PlaceCreation' });
     };
-    return { clickHandler, cameraInput };
+
+    return { clickHandler };
   }
 };
 </script>
 
 <style lang="scss">
 .camera-btn {
-  --btn-size: 64px;
+  --btn-size: 72px;
 
   position: fixed;
-  bottom: 80px;
-  right: 16px;
-  color: var(--camera-btn-color);
+  bottom: 24px;
+  right: 18px;
+  color: var(--camera-btn-text-color);
 
   button {
     --btn-size: inherit;
-    --icon-size: 32px;
+    --icon-size: 36px;
 
     &:hover {
       span {
@@ -51,9 +52,7 @@ export default {
   }
 
   input {
-    position: absolute;
-    opacity: 0;
-    transform: scale(0);
+    display: none;
   }
 
   @media (max-width: 426px) {

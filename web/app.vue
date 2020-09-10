@@ -1,5 +1,12 @@
 <template>
-  <router-view id="app" />
+  <Suspense>
+    <template #default>
+      <router-view id="app" />
+    </template>
+    <template #fallback>
+      Loading...
+    </template>
+  </Suspense>
 </template>
 
 <style lang="scss">

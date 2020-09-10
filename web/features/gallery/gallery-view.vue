@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, computed, nextTick } from 'vue';
+import { defineComponent, reactive, computed } from 'vue';
 
 import Layout from '@/layouts/main.vue';
 import AppBar from '@/components/appbar.vue';

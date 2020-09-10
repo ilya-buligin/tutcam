@@ -20,6 +20,11 @@
       icon="close"
       @click="isSidebarVisible = false"
     />
+    <nav>
+      <ul>
+        <li><router-link to="/">Your Places</router-link></li>
+      </ul>
+    </nav>
   </div>
 </template>
 
